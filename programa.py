@@ -8,17 +8,27 @@ class Nodo:
 
     def __str__(self):
         cadena = '| ' + str(self.dato) + ' |'
+
         if self.siguiente != None:
             cadena += ' -> '
+        
         return cadena
-
+    
 class LSE:
     def __init__(self):
         self.primero = None
         self.ultimo = None
-
+    
+    def __del__(self):
+        self.liberaMemoria()
+    
     def estaVacia(self):
-        return self.primero == None and self.ultimo == None
+        return self.primero ==  None and self.ultimo == None
+    
+    def liberaMemoria(self):
+        while not self.estaVacia():
+            x = self.eliminaAlInicio()
+            print(f'Se elimina {x}')
 
     def insertaAlInicio(self, dato):
         if self.estaVacia():
@@ -34,7 +44,7 @@ class LSE:
         else:
             self.ultimo.siguiente = Nodo(dato, None)
             self.ultimo = self.ultimo.siguiente
-            
+        
     def muestra(self):
         aux = self.primero
         while aux != None:
@@ -44,56 +54,70 @@ class LSE:
     def busca(self, dato):
         aux = self.primero
         while aux != None:
-            if dato == aux.dato:
+            if aux.dato == dato:
                 return True
             aux = aux.siguiente
+
         return False
 
-    def eliminaALInicio(self):
-        aux = self.primero
-        x = aux.dato
-        self.primero = self.primero.siguiente
-        del aux
+    def eliminaAlInicio(self):
+        if self.estaVacia():
+            return None
+        elif self.primero==self.ultimo:
+            x = self.primero.dato
+            del self.primero
+            self.primero=None
+            self.ultimo=None
+        else:
+            aux = self.primero
+            x = aux.dato
+            self.primero = self.primero.siguiente
+            del aux
         return x
 
-    def eliminaALFinal(self):
-        aux = self.primero
-        while aux.siguiente != self.ultimo:
-            aux = aux.siguiente
+    def eliminaAlFinal(self):
+        if self.estaVacia():
+            return None
+        elif self.primero==self.ultimo:
+            x = self.ultimo.dato
+            del self.ultimo
+            self.ultimo=None
+            self.primero=None
+        else:
+            aux = self.primero
+            x = self.ultimo.dato
+            
+            aux = self.primero
+            while aux.siguiente != self.ultimo:
+                aux = aux.siguiente
 
-        x = self.ultimo.dato
-        del self.ultimo
-        aux.siguiente = None
-        self.ultimo = aux
+            del self.ultimo
+            self.ultimo = aux
+            self.ultimo.siguiente = None
         return x
 
     def elimina(self, dato):
         if self.estaVacia():
             return False
-        
         elif dato == self.primero.dato:
-            self.eliminaALInicio()
+            self.eliminaAlInicio()
             return True
-
         elif dato == self.ultimo.dato:
-            self.eliminaALFinal()
+            self.eliminaAlFinal()
             return True
-
         else:
             aux1 = self.primero
             aux2 = self.primero.siguiente
-
-            while aux2 !=None and dato != aux2.dato:
+            while aux2 != None and dato != aux2.dato:
                 aux1 = aux1.siguiente
                 aux2 = aux2.siguiente
-
             if aux2 == None:
                 return False
             else:
                 aux1.siguiente = aux2.siguiente
                 del aux2
                 return True
-
+            
     def inserta(self, dato):
         if self.estaVacia() or dato <= self.primero.dato:
             self.insertaAlInicio(dato)
@@ -115,18 +139,11 @@ if __name__ == '__main__':
     system('cls')
 
     L = LSE()
-
     n = randrange(11)
     for i in range(n):
         x = randrange(101)
         L.inserta(x)
+
     L.muestra()
-    print()
+    print('\n\nFin del programa\n\n')
 
-    cont = 0
-    aux = L.primero
-    while aux != None:
-        cont = cont + 1
-        aux = aux.siguiente
-
-    print(f'¿{n} = {cont}?')
