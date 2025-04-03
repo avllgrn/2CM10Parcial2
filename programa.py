@@ -149,27 +149,20 @@ class LSE:
 
             aux1.siguiente = Nodo(dato, aux2)
 
+    def concatena(self, OtraLista):
+        L3 = LSE()
 
+        aux = self.primero
+        while aux!=None:
+            L3.insertaAlFinal(aux.dato)
+            aux=aux.siguiente
 
+        aux = OtraLista.primero
+        while aux!=None:
+            L3.insertaAlFinal(aux.dato)
+            aux=aux.siguiente
 
-
-
-
-def concatena(L1, L2):
-    L3 = LSE()
-
-    aux = L1.primero
-    while aux!=None:
-        L3.insertaAlFinal(aux.dato)
-        aux=aux.siguiente
-
-    aux = L2.primero
-    while aux!=None:
-        L3.insertaAlFinal(aux.dato)
-        aux=aux.siguiente
-
-    return L3
-
+        return L3
 
 if __name__ == '__main__':
     system('cls')
@@ -182,7 +175,7 @@ if __name__ == '__main__':
     n = randrange(3, 5)
     L2.generaListaDesordenada(n)
 
-    L3 = concatena(L1, L2)
+    L3 = L1.concatena(L2)
 
     L1.muestra()
     print()
