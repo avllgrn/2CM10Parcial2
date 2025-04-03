@@ -164,17 +164,7 @@ class LSE:
 
         return L3
 
-if __name__ == '__main__':
-    system('cls')
-
-    L1 = LSE()
-    n = randrange(3, 6)
-    L1.generaListaOrdenada(n)
-
-    L2 = LSE()
-    n = randrange(3, 5)
-    L2.generaListaOrdenada(n)
-
+def uneOrdenadamente(L1, L2):
     L3 = LSE()
 
     aux1=L1.primero
@@ -194,6 +184,21 @@ if __name__ == '__main__':
     while aux2!=None:
         L3.insertaAlFinal(aux2.dato)
         aux2=aux2.siguiente
+
+    return L3
+
+if __name__ == '__main__':
+    system('cls')
+
+    L1 = LSE()
+    n = randrange(3, 6)
+    L1.generaListaOrdenada(n)
+
+    L2 = LSE()
+    n = randrange(3, 5)
+    L2.generaListaOrdenada(n)
+
+    L3 = uneOrdenadamente(L1, L2)
 
     L1.muestra()
     print()
