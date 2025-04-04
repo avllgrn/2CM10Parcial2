@@ -186,6 +186,21 @@ class LSE:
             aux2=aux2.siguiente
 
         return L3
+    
+def copia(Origen, Destino):
+    Destino.liberaMemoria()
+    aux = Origen.primero
+    while aux!=None:
+        Destino.insertaAlFinal(aux.dato)
+        aux=aux.siguiente
+
+def generaInvertida(Origen):
+    I = LSE()
+    aux = Origen.primero
+    while aux!=None:
+        I.insertaAlInicio(aux.dato)
+        aux=aux.siguiente
+    return I
 
 if __name__ == '__main__':
     system('cls')
@@ -195,16 +210,10 @@ if __name__ == '__main__':
     L1.generaListaOrdenada(n)
 
     L2 = LSE()
-    aux = L1.primero
-    while aux!=None:
-        L2.insertaAlFinal(aux.dato)
-        aux=aux.siguiente
 
-    L3 = LSE()
-    aux = L1.primero
-    while aux!=None:
-        L3.insertaAlInicio(aux.dato)
-        aux=aux.siguiente
+    copia(L1, L2)
+    copia(L1, L2)
+    L3 = generaInvertida(L1)
 
     L1.muestra()
     print()
