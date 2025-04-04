@@ -187,20 +187,20 @@ class LSE:
 
         return L3
     
-def copia(Origen, Destino):
-    Destino.liberaMemoria()
-    aux = Origen.primero
-    while aux!=None:
-        Destino.insertaAlFinal(aux.dato)
-        aux=aux.siguiente
+    def copia(self, Destino):
+        Destino.liberaMemoria()
+        aux = self.primero
+        while aux!=None:
+            Destino.insertaAlFinal(aux.dato)
+            aux=aux.siguiente
 
-def generaInvertida(Origen):
-    I = LSE()
-    aux = Origen.primero
-    while aux!=None:
-        I.insertaAlInicio(aux.dato)
-        aux=aux.siguiente
-    return I
+    def generaInvertida(self):
+        I = LSE()
+        aux = self.primero
+        while aux!=None:
+            I.insertaAlInicio(aux.dato)
+            aux=aux.siguiente
+        return I
 
 if __name__ == '__main__':
     system('cls')
@@ -211,9 +211,9 @@ if __name__ == '__main__':
 
     L2 = LSE()
 
-    copia(L1, L2)
-    copia(L1, L2)
-    L3 = generaInvertida(L1)
+    L1.copia(L2)
+    L1.copia(L2)
+    L3 = L1.generaInvertida()
 
     L1.muestra()
     print()
@@ -228,4 +228,3 @@ if __name__ == '__main__':
     print()
     L3.muestra()
     print()
-
