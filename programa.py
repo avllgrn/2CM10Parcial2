@@ -28,7 +28,7 @@ class LSE:
     def liberaMemoria(self):
         while not self.estaVacia():
             x = self.eliminaAlInicio()
-            print(f'Se elimina {x}')
+            #print(f'Se elimina {x}')
 
     def generaListaOrdenada(self, n):
         self.liberaMemoria()
@@ -195,10 +195,23 @@ if __name__ == '__main__':
     L1.generaListaOrdenada(n)
 
     L2 = LSE()
-    n = randrange(3, 5)
-    L2.generaListaOrdenada(n)
+    aux = L1.primero
+    while aux!=None:
+        L2.insertaAlFinal(aux.dato)
+        aux=aux.siguiente
 
-    L3 = L1.uneOrdenadamente(L2)
+    L3 = LSE()
+    aux = L1.primero
+    while aux!=None:
+        L3.insertaAlInicio(aux.dato)
+        aux=aux.siguiente
+
+    L1.muestra()
+    print()
+    L2.muestra()
+    print('\n')
+
+    L2.eliminaAlFinal()
 
     L1.muestra()
     print()
@@ -207,4 +220,3 @@ if __name__ == '__main__':
     L3.muestra()
     print()
 
-    print('\n\nFin del programa\n\n')
