@@ -206,25 +206,20 @@ if __name__ == '__main__':
     system('cls')
 
     L1 = LSE()
-    n = randrange(3, 6)
+    n = randrange(11)
     L1.generaListaOrdenada(n)
-
-    L2 = LSE()
-
-    L1.copia(L2)
-    L1.copia(L2)
-    L3 = L1.generaInvertida()
-
     L1.muestra()
     print()
-    L2.muestra()
-    print('\n')
 
-    L2.eliminaAlFinal()
+    if not L1.estaVacia():
+        auxP = L1.primero
+        auxU = L1.ultimo
+        while auxP!=auxU:
+            print(f'| {auxU.dato} | <- ', end='')
+            while auxP.siguiente!=auxU:
+                auxP=auxP.siguiente
+            
+            auxU=auxP
+            auxP=L1.primero
 
-    L1.muestra()
-    print()
-    L2.muestra()
-    print()
-    L3.muestra()
-    print()
+        print(f'| {auxU.dato} |', end=' ')
